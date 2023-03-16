@@ -11,7 +11,7 @@ from pyproj import Transformer
 # pd.set_option('display.min_rows', 20)
 # pd.set_option('display.max_columns', 10)
 
-max_chabu_delta = 10  # 插补时间间隔 > 10min的数据
+max_chabu_delta = 2  # 插补时间间隔 > 2min的数据
 
 # features = ['MMSI', 'BaseDateTime', 'X', 'Y', 'SOG', 'COG', 'Heading', 'Status']
 
