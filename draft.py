@@ -27,32 +27,7 @@ from sklearn.cluster import DBSCAN
 import scipy as sp
 import os
 from sklearn.preprocessing import MinMaxScaler
-data_file_root_path = 'data/path_data/'
-
-for i in range(1):
-    data_file_path = data_file_root_path + 'id' + str(i) + '/'
-    """
-        还要做一步归一化
-    """
-    file_lst = os.listdir(data_file_path)
-    for filename in file_lst:
-        path = data_file_path + filename
-        df = pd.read_csv(path)
-        df['BaseDateTime'] = pd.to_datetime(df['BaseDateTime'])
-        df['year'] = df['BaseDateTime'].dt.year
-        df['month'] = df['BaseDateTime'].dt.month
-        df['day'] = df['BaseDateTime'].dt.day
-        df['hour'] = df['BaseDateTime'].dt.hour
-        new_df = df.iloc[:, 2:]
-        tmp = np.array(new_df)
-        tmp = MinMaxScaler(tmp)
-        print(tmp)
-        model = DBSCAN(eps=10, min_samples=3)
-        model.fit(new_df)
-        print(model.labels_)
-
-
-
+from sklearn.model_selection import train_test_split
 
 
 def dbscan_predict(dbscan_model, X_new, metric=sp.spatial.distance.euclidean):
@@ -66,7 +41,10 @@ def dbscan_predict(dbscan_model, X_new, metric=sp.spatial.distance.euclidean):
                 # Assign label of x_core to x_new
                 y_new[j] = dbscan_model.labels_[dbscan_model.core_sample_indices_[i]]
                 break
-
     return y_new
 
+
+a = np.array([[1, 2], [3, 4], [5, 6]])
+b = np.array([11,12,13])
+print((a,b))
 # c = np.concatenate((a,b),axis=2)
